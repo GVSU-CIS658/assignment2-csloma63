@@ -36,7 +36,7 @@
 }
 
 .syrup {
-  @include syrup-layer(#ffefd5);
+   @include syrup-layer(var(--syrup-color, #ffefd5));
   position: relative;
   transform: translateY(400%);
   width: 100%;

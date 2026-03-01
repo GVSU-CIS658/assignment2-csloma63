@@ -5,18 +5,18 @@ import "./style.scss";
 const bases: Record<string, string> = {
   blackTea: "#8B4513",
   greenTea: "#C8E6C9",
-  coffee: "#6F4E37",
+  coffee:   "#6F4E37",
 };
 
 const creamers: Record<string, string> = {
-  milk: "AliceBlue",
+  milk:  "AliceBlue",
   cream: "#F5F5DC",
-  half: "#FFFACD",
+  half:  "#FFFACD",
 };
 
 const syrups: Record<string, string> = {
-  vanilla: "#FFEFD5",
-  caramel: "#DAA520",
+  vanilla:  "#FFEFD5",
+  caramel:  "#DAA520",
   hazelnut: "#6B4423",
 };
 
@@ -66,28 +66,41 @@ function applyCream(input: HTMLInputElement): void {
 }
 
 function applySyrup(input: HTMLInputElement): void {
-  // TODO: implement this function
+  const syrup = document.getElementsByClassName("syrup");
+  if (syrup.length === 0) return;
+
+  const syrupColor = syrups[input.value];
+  if (!syrupColor) return;
+
+  const syrupDivider = syrup[0] as HTMLDivElement;
+  syrupDivider.style.setProperty("--syrup-color", syrupColor);
 }
 
 function setupSyrupListeners(): void {
+  const syrupInput = document.querySelectorAll<HTMLInputElement>('input[name="syrup"]');
+
+    for (let i = 0; i < syrupInput.length; i++) {
+    const input = syrupInput[i];
+    input.addEventListener("change", () => applySyrup(input))
+  };
+
+  const checked = document.querySelector<HTMLInputElement>('input[name="syrup"]:checked');
+  if (!checked) return;
+  applySyrup(checked);
+}
+setupSyrupListeners();
+
+function setupTemperatureListeners(): void {
   // TODO: implement this function
 }
-
-setupSyrupListeners();
+setupTemperatureListeners();
 
 function setupCreamListeners(): void {
   // TODO: implement this function
 }
 setupCreamListeners();
 
-function setupTemperatureListeners(): void {
-  // TODO: implement this function
-}
-
-setupTemperatureListeners();
-
 function setupBaseListeners(): void {
   // TODO: implement this function
 }
-
 setupBaseListeners();
