@@ -90,17 +90,44 @@ function setupSyrupListeners(): void {
 }
 setupSyrupListeners();
 
-function setupTemperatureListeners(): void {
-  // TODO: implement this function
-}
-setupTemperatureListeners();
+  function setupBaseListeners(): void {
+    const inputValues = document.querySelectorAll<HTMLInputElement>('input[name="base"]');
+
+    for (let i = 0; i < inputValues.length; i++) {
+      const input = inputValues[i];
+      input.addEventListener("change", () => applyBase(input));
+    }
+
+    const checked = document.querySelector<HTMLInputElement>('input[name="base"]:checked');
+    if (!checked) return;
+    applyBase(checked);
+  }
+  setupBaseListeners();
 
 function setupCreamListeners(): void {
-  // TODO: implement this function
-}
-setupCreamListeners();
+    const creams = document.querySelectorAll<HTMLInputElement>('input[name="cream"]');
 
-function setupBaseListeners(): void {
-  // TODO: implement this function
-}
-setupBaseListeners();
+    for (let i = 0; i < creams.length; i++) {
+      const input = creams[i];
+      input.addEventListener("change", () => applyCream(input));
+    }
+
+    const checked = document.querySelector<HTMLInputElement>('input[name="cream"]:checked');
+    if (!checked) return;
+    applyCream(checked);
+  }
+  setupCreamListeners();
+
+  function setupTemperatureListeners(): void {
+    const temperatures = document.querySelectorAll<HTMLInputElement>('input[name="temperature"]');
+
+    for (let i = 0; i < temperatures.length; i++) {
+      const input = temperatures[i];
+      input.addEventListener("change", () => applyTemperature(input));
+    }
+
+    const checked = document.querySelector<HTMLInputElement>('input[name="temperature"]:checked');
+    if (!checked) return;
+    applyTemperature(checked);
+  }
+  setupTemperatureListeners();
